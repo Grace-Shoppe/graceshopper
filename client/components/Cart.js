@@ -8,13 +8,26 @@ class Cart extends Component {
     super(props)
   }
 
+  async handleClick(e) {
+    // try {
+    //   e.preventDefault()
+    //   // const status =
+    //   // const totalPrice =
+    //   // const id =
+    //   await this.props.checkoutOrder()
+    // } catch (e) {
+    //   console.error(e)
+    // }
+  }
+
   render() {
     const cart = this.props.cart
+    console.log('PROPSSSSSS', this.props)
     return (
       <div id="cart">
         <h2>Cart</h2>
         <ul>{cart.map(cart => <CartLine key={cart.id} cartLine={cart} />)}</ul>
-        <button>Checkout</button>
+        <button onClick={this.handleClick}>Checkout</button>
       </div>
     )
   }

@@ -11,6 +11,7 @@ const initialState = {
  */
 const GOT_PRODUCT = 'GOT_PRODUCT'
 const UPDATE_CART = 'UPDATE_CART'
+const BOUGHT_PRODUCT = 'BOUGHT_PRODUCT'
 
 /**
  * INITIAL STATE
@@ -22,7 +23,12 @@ const defaultProduct = {}
  */
 export const gotProduct = product => ({type: GOT_PRODUCT, product})
 export const UpdateCart = product => ({type: UPDATE_CART, product})
-
+export const boughtProducts = (status, totalPrice, id) => ({
+  type: BOUGHT_PRODUCT,
+  status,
+  totalPrice,
+  id
+})
 /**
  * THUNK CREATORS
  */
@@ -44,6 +50,15 @@ export const updateCart = (product, itemQty) => async dispatch => {
   }
 }
 
+export const checkoutOrder = (status, totalPrice, id) => async dispatch => {
+  try {
+    await axios.put(`/api/orders/${id}`, {status, totalPrice, id}) //***** */
+    dispatch(boughtProducts(status, totalPrice))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -53,6 +68,14 @@ export default function(state = initialState, action) {
       return {...state, selectedProduct: action.product}
     case UPDATE_CART:
       return {...state, cart: [...state.cart, action.product]}
+    case BOUGHT_PRODUCT:
+      return {
+        ...state,
+        cart: []
+      } /*********make sure you update the order table 
+      status: action.status
+      totalPrice: action.totalPrice
+      */
     default:
       return state
   }

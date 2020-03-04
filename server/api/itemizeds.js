@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const {Itemized} = require('../db/models')
 const {Order} = require('../db/models')
-const {Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -62,4 +61,4 @@ router.get('/order', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
+}) //maybe shouldn't be here

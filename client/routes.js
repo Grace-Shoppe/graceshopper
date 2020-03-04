@@ -6,7 +6,7 @@ import {
   Login,
   Signup,
   UserHome,
-  Home,
+  Checkout,
   ProductList,
   Product,
   Cart
@@ -33,6 +33,7 @@ class Routes extends Component {
         <Route exact path="/" component={ProductList} />
         <Route exact path="/products/:id" component={Product} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         {/* <Route exact path="/products/:id" component={Product}/> */}
         {isLoggedIn && (
           <Switch>
@@ -42,6 +43,7 @@ class Routes extends Component {
             <Route exact path="/" component={ProductList} />
             <Route exact path="/products/:id" component={Product} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

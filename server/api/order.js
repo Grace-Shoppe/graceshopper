@@ -29,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.get('/:id/checkout', async (req, res, next) => {
+router.get('/checkout', async (req, res, next) => {
   try {
     const orderNumber = await Itemized.findById()
   } catch (error) {

@@ -8,10 +8,8 @@ class Checkout extends React.Component {
     this.state = {}
   }
 
-  componentDidMount() {}
-
   render() {
-    return <h1>CHECKOUTPAGE</h1>
+    return <h1>HELLOWORLD</h1>
   }
 }
 

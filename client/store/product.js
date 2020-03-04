@@ -64,11 +64,11 @@ export default function(state = initialState, action) {
       return {...state, selectedProduct: action.product}
     case UPDATE_CART:
       return {...state, cart: [...state.cart, action.product]}
-    case BOUGHT_PRODUCT:
-      return {
-        ...state,
-        cart: []
-      } /*********make sure you update the order table 
+    // case BOUGHT_PRODUCT:
+    //   return {
+    //     ...state,
+    //     cart: []
+    /*********make sure you update the order table 
       status: action.status
       totalPrice: action.totalPrice
       */

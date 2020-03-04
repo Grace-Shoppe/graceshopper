@@ -8,6 +8,16 @@ class Cart extends Component {
     super(props)
   }
 
+  async componentDidMount() {
+    console.log('eeeeeeee')
+    this._isMounted = true
+    const {data} = await axios.get('/api/itemizeds/order')
+    console.log('----->', data)
+    // if (this._isMounted) {
+    //   this.setState({products})
+    // }
+  }
+
   render() {
     const cart = this.props.cart
     console.log('PROPSSSSSS', this.props)

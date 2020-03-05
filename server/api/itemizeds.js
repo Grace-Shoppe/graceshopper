@@ -29,6 +29,8 @@ router.post('/', async (req, res, next) => {
     if (currentItem !== null) {
       currentItem.quantity = currentItem.quantity + req.body.itemQty
       await currentItem.save()
+      currentItem.totalPrice = currentItem.quantity * currentItem.purchasePrice
+      await currentItem.save()
       res.send(currentItem)
     } else {
       const newItem = {
@@ -38,6 +40,9 @@ router.post('/', async (req, res, next) => {
         orderId: order.id
       }
       const item = await Itemized.create(newItem)
+      item.totalPrice = item.quantity * item.purchasePrice
+      item.productName = req.body.product.name
+      await item.save()
       res.send(item)
     }
   } catch (error) {
@@ -45,20 +50,25 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.get('/order', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
         userId: req.session.passport.user
       }
     })
-    const items = await Itemized.findAll({
+    const currentItem = await Itemized.findOne({
       where: {
+        productId: req.body.product.id,
         orderId: order.id
       }
     })
-    res.json(items)
-  } catch (err) {
-    next(err)
+    currentItem.quantity = req.body.itemQty
+    await currentItem.save()
+    console.log(currentItem.quantity)
+    console.log(req.body.itemQty)
+    res.send(currentItem)
+  } catch (error) {
+    next(error)
   }
 }) //maybe shouldn't be here

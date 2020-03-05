@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import CartLine from './cartLine'
+import CartLine from './CartLine'
+import {getCart} from '../store/product'
 
 class Cart extends Component {
   constructor(props) {
@@ -10,13 +11,7 @@ class Cart extends Component {
   }
 
   async componentDidMount() {
-    console.log('eeeeeeee')
-    this._isMounted = true
-    const {data} = await axios.get('/api/itemizeds/order')
-    console.log('----->', data)
-    // if (this._isMounted) {
-    //   this.setState({products})
-    // }
+    this.props.getCart()
   }
 
   render() {
@@ -40,6 +35,8 @@ const mapStateToProps = state => ({
   cart: state.product.cart
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  getCart: () => dispatch(getCart())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

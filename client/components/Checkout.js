@@ -1,14 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import CartLine from './cartLine'
 
-class Checkout extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
+class Checkout extends Component {
+  constructor(props) {
+    super(props)
   }
 
   render() {
-    return <h1>HELLOWORLD</h1>
+    const cart = this.props.cart
+    return (
+      <div>
+        <h1>Purchase Confirmation</h1>
+        <ul>{cart.map(cart => <CartLine key={cart.id} cartLine={cart} />)}</ul>
+      </div>
+    )
   }
 }
 

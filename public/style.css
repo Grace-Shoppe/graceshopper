@@ -32,6 +32,10 @@ img {
   height: 230px;
 }
 
+.butt1 {
+  margin: 5px;
+}
+
 #product-container {
   display: flex;
   flex-wrap: wrap;
